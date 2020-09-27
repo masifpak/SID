@@ -1,5 +1,5 @@
-# SID
-#
+# Search in Dark (SID)
+
 ## Infrastructure Requirement for Private-Box on Public Cloud
 
 We are preparing this document considering Azure as Cloud Service Provider.
