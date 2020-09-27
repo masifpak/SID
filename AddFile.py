@@ -58,10 +58,13 @@ path = 'data/*.txt'
 files = glob.glob(path)
 for fpath in files:
   #print fpath
-
-
+  #f_name = os.path.basename(fpath)
+  f_name = os.path.splitext(fpath)[0]
 
   text = open(fpath, "r")
+  CFI = client.File_ENC(KSE, fpath)
+  with open(f_name +".enc", "wb") as cf:
+    cf.write(CFI)
 
   # Loop through each line of the file
   for line in text:
@@ -172,4 +175,4 @@ for wmap in Map.keys():
     #print wmap
     wmapf  = csv.writer(open('add-val-map.csv', "aw"))
     wmapf.writerow([wmap,Map[wmap]])
-#print Map
+

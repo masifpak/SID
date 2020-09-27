@@ -1,9 +1,10 @@
 
-
+from Crypto.PublicKey import RSA
 import os
 import hashlib
 import hmac
 import base64
+from cryptography.fernet import Fernet
 import random
 import cPickle as pickle
 import math
@@ -33,12 +34,33 @@ class SIDClient:
     #######################
     '''
 
+
+
+    def Client_Key_Pair():
+        secret = "searcindark"
+        key = RSA.generate(2048)
+        privatekey = key.exportKey(passphrase=secret, pkcs = 8)
+        publickey = key.publickey().exportKey()
+        with open('Client_Private_key.pem', 'wb') as fpv:
+            fpv.write(privatekey)
+        with open('Client_Public_key.pem', 'wb') as fpub:
+            fpub.write(publickey)
+        #print privatekey
+        #print publickey
+
+    Client_Key_Pair()
+
     def KG():
         """
         Generates a key and save it into a file
         """
-
-        KG = base64.b64encode(os.urandom(32))
+        x = os.urandom(128)
+        k = os.urandom(16)
+        #print x
+        #print k
+        K_G = x + k
+        #print KG
+        KG = base64.b64encode(K_G)
         print "KG: " , KG
         with open("secret.key", "wb") as key_file:
             key_file.write(KG)
@@ -56,7 +78,7 @@ class SIDClient:
         return open("secret.key", "rb").read()
 
     def Generate_KSE():
-        AES_key_length = 16  # use larger value in production
+        AES_key_length = 32  # use larger value in production
         secret_key = os.urandom(AES_key_length)
         KSE = base64.b64encode(secret_key)
         file = open('KSE.key', 'wb')
@@ -64,7 +86,7 @@ class SIDClient:
         file.close()
         print "KSE: " ,  KSE
         return KSE
-    y = Generate_KSE()
+    #y = Generate_KSE()
      # def Final_K (self):
    #     KSE = Generate_KSE()
    #     KG  = KG()
@@ -117,6 +139,14 @@ class SIDClient:
         #print encoded_enc_msg
         return encoded_enc_msg
     #ENC (y, 'I love pakistan to much')
+
+    def File_ENC (self, KSE, filename):
+        f = Fernet(KSE)
+        with open(filename, "rb") as file:
+            # read all file data
+            file_data = file.read()
+            CFi = f.encrypt(file_data)
+            return CFi
 
     def __init__(self, k = 32, z = 100000):
         self.k = k
