@@ -1,0 +1,12 @@
+ABSTRACT
+Symmetric Searchable Encryption (SSE) allows users to search directly on their outsourced encrypted data, in a way that the privacy
+of both the files and the search queries is preserved. Naturally, with
+every search query, some information is leaked. The leakage becomes even bigger when the scheme is dynamic (i.e. supports file
+insertions and deletions). In this paper, we design a forward private
+dynamic SSE scheme where file insertions and deletions do not leak
+any information about previous queries executed by users. Then
+we extend our construction to also support the crucial notion of
+backward privacy. Moreover, our construction supports the multiclient model, in the sense that every user that holds the secret key
+can perform search queries. Finally, our scheme also focuses on the
+problem of synchronization by utilizing the functionality offered
+by AMD’s Secure Virtualization Encryption (SEV).
