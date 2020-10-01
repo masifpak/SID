@@ -1,6 +1,0 @@
-Pseudorandom functions (PRFs) and their cousins, pseudorandom permutations
-(PRPs), flgure as central tools in the design of protocols, especially those for sharedkey cryptography. At one level, PRFs and PRPs can be used to model block ciphers,
-and they thereby enable the security analysis of protocols based on block ciphers.
-But PRFs and PRPs are also a useful conceptual starting point in contexts where
-block ciphers don’t quite flt the bill because of their flxed block-length. So in this
-chapter we will introduce PRFs and PRPs and investigate their basic properties.

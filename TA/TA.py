@@ -28,3 +28,5 @@ def TA_Listening():
             break
     conn.sendall(data)
     conn.close()
+
+#TA_Listening()
